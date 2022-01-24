@@ -21,34 +21,15 @@
                 {% if(app.user) %}
                     <a href="{{ path('sub_category_add') }}">Créer une sous-catégorie</a>
                     <a href="{{ path('sub_category_edit', {'id': subCategory.id}) }}">Modifier la sous-catégorie</a>
+                    <a href="{{ path('thread_add', {'id': subCategory.id}) }}">Ajouter un Thread</a>
                 {% endif %}
-                <a href="{{ path('thread_add', {'id': subCategory.id}) }}">Ajouter le Thread</a>
+
 
                 {% for thread in subCategory.threads %}
-                <a href="{{ path('thread_index', {'id': thread.id}) }}"><strong>{{ thread.subject }}</strong></a>
+                <a href="{{ path('thread_index', {'id': thread.id}) }}">
+                    <strong>{{ thread.subject }}</strong>
+                </a>
                 {% endfor %}
-
-{#                {% for post in thread.posts %}#}
-{#                #}
-{#                {% endfor %}#}
-{#                {% for subCategory in subCategories %}#}
-{#                    <div class="list-group-item list-group-item-action active">#}
-{#                        <div class="d-flex w-100 justify-content-between">#}
-{#                            <h5 class="mb-1">{{ subCategory.name }}</h5>#}
-{#                        </div>#}
-{#                        #}{#                        <p class="mb-1">{{ category.description }}</p>#}
-
-{#                        <div class="subCateg">#}
-{#                            {% for subCategory in subCategory.threads %}#}
-{#                                <li>#}
-{#                                    <ul>#}
-{#                                        <a href="{{ path('sub_category_index', {'id': subCategory.id}) }}">{{ subCategory.name }}</a>#}
-{#                                    </ul>#}
-{#                                </li>#}
-{#                            {% endfor %}#}
-{#                        </div>#}
-{#                    </div>#}
-{#                {% endfor %}#}
             </div>
 
         </div>

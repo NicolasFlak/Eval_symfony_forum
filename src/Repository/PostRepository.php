@@ -20,17 +20,17 @@ class PostRepository extends ServiceEntityRepository
     }
 
 
-    public function findAuthor($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->select('name')
-            ->join('user', 'u')
-            ->where('p.user_id = :user_id')
-            ->setParameter('user_id', $value)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+//    public function findAuthor($value)
+//    {
+//        return $this->createQueryBuilder('p')
+//            ->select('name')
+//            ->join('user', 'u')
+//            ->where('p.user_id = :user_id')
+//            ->setParameter('user_id', $value)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
     /*
     public function findOneBySomeField($value): ?Post

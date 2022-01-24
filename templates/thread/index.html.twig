@@ -17,7 +17,7 @@
         <div>
 
             <div>
-                <strong>{{ thread.subject }}</strong>
+                <strong>Sujet du thread : {{ thread.subject }}</strong>
                 {% if(app.user) %}
                     <div>
                         <a href="{{ path('thread_edit', {'id': thread.id}) }}">Éditer le thread</a>
@@ -32,17 +32,14 @@
                     {% for post in thread.posts %}
                         <div class="list-group-item list-group-item-action active">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{ post.content }}</h5>
+                                <h5 class="mb-1">Contenu du post : {{ post.content }}</h5>
                                 <div>
-                                    <a href="{{ path('post_edit', {'id': thread.id}) }}">Éditer le post</a>
+                                    <a href="{{ path('post_edit', {'id': thread.id, 'idPost': post.id}) }}">Éditer le post</a>
                                 </div>
                             </div>
                             <div>
-                                <p>Posté le {{ post.createdAt|date('Y-m-d') }}</p>
-                                <p>par {{ threadAuthor }}</p>
+                                <p>Posté le {{ post.createdAt|date('Y-m-d') }} par {{ post.user.email }}</p>
                             </div>
-
-
                         </div>
                     {% endfor %}
                 </div>

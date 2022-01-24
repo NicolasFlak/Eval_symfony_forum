@@ -42,11 +42,12 @@ class ThreadController extends AbstractController
     {
 
         $threadEntity = $this->threadRepository->find($id);
-        $pu = $threadEntity->getId();
-        $threadAuthor = $this->postRepository->findAuthor($pu);
+//        $user = $this->getUser();
+//        $pu = $threadEntity->getId();
+//        $threadAuthor = $this->postRepository->findAuthor($pu);
         return $this->render('thread/index.html.twig', [
             'thread' => $threadEntity,
-            'threadAuthor'=>$threadAuthor
+//            'threadAuthor'=>$threadAuthor
         ]);
     }
 
@@ -79,8 +80,6 @@ class ThreadController extends AbstractController
     #[Route('/subCategory/{id}/thread/edit', name: 'thread_edit')]
     public function editThread(string $id, Request $request): Response
     {
-        $thread = $this->threadRepository->find($id);
-
         $threadEntity = $this->threadRepository->find($id);
         $form = $this->createForm(ThreadFormType::class, $threadEntity);
         $form->handleRequest($request);
@@ -88,7 +87,7 @@ class ThreadController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($threadEntity);
             $this->entityManager->flush();
-            return $this->redirectToRoute('thread_index', ['id' => $thread->getId()]);
+            return $this->redirectToRoute('thread_index', ['id' => $threadEntity->getId()]);
         }
 
         return $this->render('thread/edit.html.twig', [
@@ -121,21 +120,21 @@ class ThreadController extends AbstractController
         ]);
     }
 
-    #[Route('/thread/{id}/post/edit/', name: 'post_edit')]
-    public function editPost(string $id, Request $request): Response
+    #[Route('/thread/{id}/post/edit/{idPost}', name: 'post_edit')]
+    public function editPost(string $id, string $idPost, Request $request): Response
     {
 //        $threadId = $this->threadRepository->find($id);
-        $postId = $this->postRepository->find($id);
-        dump($postId);
+//        $postId = $this->postRepository->find($idPost);
+//        dump($postId);
 
-        $postEntity = $this->postRepository->find($id);
+        $postEntity = $this->postRepository->find($idPost);
         $form = $this->createForm(PostFormType::class, $postEntity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($postEntity);
             $this->entityManager->flush();
-            return $this->redirectToRoute('thread_index', ['id' => $postId->getId()]);
+            return $this->redirectToRoute('thread_index', ['id' => $id]);
         }
 
         return $this->render('post/edit.html.twig', [
