@@ -59,7 +59,6 @@ class ThreadController extends AbstractController
             $thread->setSubCategory($subCategory);
             $thread->setCreatedAt(new \DateTime());
             $thread->setUser($this->getUser());
-
             $this->entityManager->persist($thread);
             $this->entityManager->flush();
 
