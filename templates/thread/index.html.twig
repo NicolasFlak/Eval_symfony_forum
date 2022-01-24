@@ -15,9 +15,7 @@
     {% if(app.user) %}
 
         <div>
-            {% if(app.user) %}
-                <a href="{{ path('thread_add') }}">Créer un nouveau thread</a>
-            {% endif %}
+
             <div>
                 <strong>{{ thread.subject }}</strong>
                 {% if(app.user) %}
@@ -29,25 +27,28 @@
             </div>
 
             <div class="container w-80">
+
                 <div class="list-group">
                     {% for post in thread.posts %}
                         <div class="list-group-item list-group-item-action active">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{ post.content }}</h5>
+                                <div>
+                                    <a href="{{ path('post_edit', {'id': thread.id}) }}">Éditer le post</a>
+                                </div>
+                            </div>
+                            <div>
+                                <p>Posté le {{ post.createdAt|date('Y-m-d') }}</p>
+                                <p>par {{ threadAuthor }}</p>
                             </div>
 
-{#                            <div class="subCateg">#}
-{#                                {% for subCategory in subCategory.threads %}#}
-{#                                    <li>#}
-{#                                        <ul>#}
-{#                                            <a href="{{ path('sub_category_index', {'id': subCategory.id}) }}">{{ subCategory.name }}</a>#}
-{#                                        </ul>#}
-{#                                    </li>#}
-{#                                {% endfor %}#}
-{#                            </div>#}
+
                         </div>
                     {% endfor %}
                 </div>
+                {% if(app.user) %}
+                    <a href="{{ path('post_add', {'id': thread.id}) }}">Créer un nouveau post</a>
+                {% endif %}
 
             </div>
 
