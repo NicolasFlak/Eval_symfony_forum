@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HomeController{% endblock %}
+
+{% block body %}
+    <div>
+        <a href="{{ path('app_register') }}">Créer un compte</a>
+        {% if(app.user) %}
+            <a href="{{ path('app_logout') }}">Log out</a>
+        {% else %}
+            <a href="{{ path('app_login') }}">Log in</a>
+        {% endif %}
+    </div>
+
+    <div>
+
+        <div class="container w-80">
+            <div class="list-group">
+                {% for category in categories %}
+                    <div class="list-group-item list-group-item-action active">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ category.name }}</h5>
+                        </div>
+{#                        <p class="mb-1">{{ category.description }}</p>#}
+
+                        <div class="subCateg">
+                            {% for subCategory in category.subCategories %}
+                                <li>
+                                    <ul>
+                                        <a href="{{ path('sub_category_index', {'id': subCategory.id}) }}">{{ subCategory.name }}</a>
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
